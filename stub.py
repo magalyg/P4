@@ -28,7 +28,20 @@ class Learner(object):
         '''
 
         # You might do some learning here based on the current state and the last state.
+        # You might do some learning here based on the current state and the last state.
 
+        # You'll need to select and action and return it.
+        # Return 0 to swing and 1 to jump.
+        #Magaly: implement a function that returns an expected next step depending on the different actions we take 
+        #Magaly: perform the action that returns highest rewards
+        #Approximate q learning https://courses.cs.washington.edu/courses/cse473/16au/slides-16au/18-approx-rl2.pdf
+        #alculate value of jumping 
+        #caculate value of not jumping (next position)
+        #Mark says on piazza we do not have time to calculate all of the positions
+        #So it must be approximate 
+        #TIdea of Neural Network https://www.nervanasys.com/demystifying-deep-reinforcement-learning/
+        #Must do a global variable for keeping the history because it is not returned 
+        new_action = npr.rand() < 0.1
         # You'll need to select and action and return it.
         # Return 0 to swing and 1 to jump.
 
