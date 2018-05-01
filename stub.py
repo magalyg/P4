@@ -20,7 +20,19 @@ class Learner(object):
         self.last_state  = None
         self.last_action = None
         self.last_reward = None
+    #This function is where we update the reward I am just confused as to what to 
+    def _get_reward(s,a):
+       reward =0
+       next_state = s 
+       if(a=0){
+        
 
+        reward = 
+        }else if (a =1){
+        reward = 
+        }
+        return reward 
+  
     def action_callback(self, state):
         '''
         Implement this function to learn things and take actions.
@@ -28,23 +40,25 @@ class Learner(object):
         '''
 
         # You might do some learning here based on the current state and the last state.
-        # You might do some learning here based on the current state and the last state.
-
-        # You'll need to select and action and return it.
-        # Return 0 to swing and 1 to jump.
-        #Magaly: implement a function that returns an expected next step depending on the different actions we take 
-        #Magaly: perform the action that returns highest rewards
-        #Approximate q learning https://courses.cs.washington.edu/courses/cse473/16au/slides-16au/18-approx-rl2.pdf
-        #alculate value of jumping 
-        #caculate value of not jumping (next position)
-        #Mark says on piazza we do not have time to calculate all of the positions
-        #So it must be approximate 
-        #TIdea of Neural Network https://www.nervanasys.com/demystifying-deep-reinforcement-learning/
-        #Must do a global variable for keeping the history because it is not returned 
-        new_action = npr.rand() < 0.1
-        # You'll need to select and action and return it.
-        # Return 0 to swing and 1 to jump.
-
+        #phi_i represetnt the column of a matrix 
+        #We need to define the states for a selected number of n not all states because it is continu0s
+        #0 MEANS STAY #1 MEANS JUMP 
+        alpha = 
+        p_1 = [state.get('score')]
+        tree = list(state.get('tree').values())
+        monkey = list(state.get('monkey').values())
+        phi_1 = np.hstack((np.zeros(7),p_1,tree,monkey,1))
+        phi_2 = np.hstack((p_1,tree,monkey,np.zeros(7),1))
+        theta =np.ones(15)
+        state_i = np.hstack((p_1,tree,monkey,p_1,tree,monkey,1))
+        beta = .5
+        Q= np.vstack((np.multiply(theta,phi_1), np.multiply(theta,phi_2))).T
+      
+        #It doesnt matter which one is s' or s in any case we could jsut change this to self.reward + gamma*max(self.get_reward(s',a))
+        Q_plus = self.last_reward + gamma*max((self.get_reward(s,0),self.get_reward(s,1)))
+        phi_i =# this one would be defined as the maximum of any of the above 
+        theta_new = theta - alpha *(Q_plus_i - Q)*phi_i
+        Q_new =  np.vstack((np.multiply(theta_new,phi_1), np.multiply(theta_new,phi_2))).T
         new_action = npr.rand() < 0.1
         new_state  = state
 
@@ -77,7 +91,6 @@ def run_games(learner, hist, iters = 100, t_len = 100):
         
         # Save score history.
         hist.append(swing.score)
-
         # Reset the state of the learner.
         learner.reset()
     pg.quit()
